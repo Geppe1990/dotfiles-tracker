@@ -33,6 +33,7 @@ ipcMain.handle('read-dotfiles', async () => {
 		'.eslintrc', '.prettierrc', '.stylelintrc', '.tern-project', '.jsconfig.json',
 		'.viminfo', '.dircolors', '.cargo/config', '.rustfmt.toml', '.clang-format', '.ackrc'
 	];
+
 	return dotfiles.filter(dotfile => fs.existsSync(path.join(homedir, dotfile)));
 });
 
@@ -43,5 +44,17 @@ ipcMain.handle('read-dotfile', async (_, dotfile: string) => {
 		return fs.readFileSync(filePath, 'utf-8');
 	} else {
 		return `Il dotfile ${dotfile} non esiste.`;
+	}
+});
+
+ipcMain.handle('save-dotfile', async (_, dotfile: string, content: string) => {
+	const homedir = os.homedir();
+	const filePath = path.join(homedir, dotfile);
+	try {
+		fs.writeFileSync(filePath, content, 'utf-8');
+		return 'success';
+	} catch (error) {
+		console.error(`Errore durante il salvataggio del dotfile ${dotfile}:`, error);
+		throw error;
 	}
 });

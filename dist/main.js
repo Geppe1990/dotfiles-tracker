@@ -59,7 +59,7 @@ electron_1.ipcMain.handle('read-dotfiles', () => __awaiter(void 0, void 0, void 
         '.config/nvim/init.vim', '.config/nvim/init.lua', '.p10k.zsh', '.aliases', '.functions',
         '.exports', '.gitignore', '.gitattributes', '.wgetrc', '.curlrc', '.npmrc', '.yarnrc',
         '.eslintrc', '.prettierrc', '.stylelintrc', '.tern-project', '.jsconfig.json',
-        '.viminfo', '.dircolors', '.cargo/config', '.rustfmt.toml', '.clang-format', '.ackrc', 'package.json'
+        '.viminfo', '.dircolors', '.cargo/config', '.rustfmt.toml', '.clang-format', '.ackrc'
     ];
     return dotfiles.filter(dotfile => fs.existsSync(path.join(homedir, dotfile)));
 }));
@@ -71,5 +71,17 @@ electron_1.ipcMain.handle('read-dotfile', (_, dotfile) => __awaiter(void 0, void
     }
     else {
         return `Il dotfile ${dotfile} non esiste.`;
+    }
+}));
+electron_1.ipcMain.handle('save-dotfile', (_, dotfile, content) => __awaiter(void 0, void 0, void 0, function* () {
+    const homedir = os.homedir();
+    const filePath = path.join(homedir, dotfile);
+    try {
+        fs.writeFileSync(filePath, content, 'utf-8');
+        return 'success';
+    }
+    catch (error) {
+        console.error(`Errore durante il salvataggio del dotfile ${dotfile}:`, error);
+        throw error;
     }
 }));

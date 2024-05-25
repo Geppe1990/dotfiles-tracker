@@ -2,11 +2,12 @@ body {
     font-family: 'Open Sans', sans-serif;
 }
 h2 {
-    font-family: 'Open Sans', sans-serif;
     font-weight: 700;
 }
 
-code[class*="language-"], pre[class*="language-"] {
+code[class*="language-"],
+pre[class*="language-"],
+textarea {
     font-family: 'Fira Code', monospace;
 }
 
@@ -14,24 +15,25 @@ code[class*="language-"], pre[class*="language-"] {
     width: 20vw;
 }
 
-#dotfiles-content {
+#editor-container {
     width: 80vw;
-}
-
-.container {
-    display: flex;
-    flex-wrap: nowrap;
-}
-
-#dotfiles-content {
     padding: 10px;
+    display: none;
+}
+
+#editor-container.active {
+    display: block;
 }
 
 .sidebar ul {
     padding: 10px;
 }
 
-.sidebar li {
+.sidebar ul li.active {
+    font-weight: bold;
+}
+
+.sidebar ul li {
     cursor: pointer;
     list-style-type: none;
     margin-bottom: 10px;
