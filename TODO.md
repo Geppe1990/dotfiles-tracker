@@ -1,1 +1,2 @@
 - Inserire configurazione dove inserire lista file
+- Creare comando watch
