@@ -1,0 +1,1 @@
+- Inserire configurazione dove inserire lista file
