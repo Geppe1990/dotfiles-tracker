@@ -42,37 +42,27 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, 'preload.js'),
+            contextIsolation: true,
         }
     });
-    mainWindow.loadFile(path.join(__dirname, 'index.html'));
     // Apri gli strumenti di sviluppo
     mainWindow.webContents.openDevTools();
+    mainWindow.loadFile('index.html');
 }
 electron_1.app.on('ready', createWindow);
-electron_1.app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        electron_1.app.quit();
-    }
-});
-electron_1.app.on('activate', () => {
-    if (electron_1.BrowserWindow.getAllWindows().length === 0) {
-        createWindow();
-    }
-});
-const dotfiles = ['.bashrc', '.zshrc', '.vimrc'];
 electron_1.ipcMain.handle('read-dotfiles', () => __awaiter(void 0, void 0, void 0, function* () {
     const homedir = os.homedir();
-    let content = '';
-    for (const file of dotfiles) {
-        const filePath = path.join(homedir, file);
-        if (fs.existsSync(filePath)) {
-            const data = fs.readFileSync(filePath, 'utf-8');
-            content += `<h2>${file}</h2><pre><code class="language-bash">${data}</code></pre>`;
-        }
-        else {
-            content += `<h2>${file}</h2><p>Non esiste.</p>`;
-        }
+    const dotfiles = ['.bashrc', '.zshrc', '.vimrc', '.gitconfig']; // List of dotfiles to check
+    return dotfiles.filter(dotfile => fs.existsSync(path.join(homedir, dotfile)));
+}));
+electron_1.ipcMain.handle('read-dotfile', (_, dotfile) => __awaiter(void 0, void 0, void 0, function* () {
+    const homedir = os.homedir();
+    const filePath = path.join(homedir, dotfile);
+    if (fs.existsSync(filePath)) {
+        return fs.readFileSync(filePath, 'utf-8');
     }
-    return content;
+    else {
+        return `Il dotfile ${dotfile} non esiste.`;
+    }
 }));

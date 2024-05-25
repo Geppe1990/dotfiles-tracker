@@ -10,43 +10,31 @@ function createWindow() {
 		width: 800,
 		height: 600,
 		webPreferences: {
-			preload: path.join(__dirname, 'preload.js')
+			preload: path.join(__dirname, 'preload.js'),
+			contextIsolation: true,
 		}
 	});
 
-	mainWindow.loadFile(path.join(__dirname, 'index.html'));
-
 	// Apri gli strumenti di sviluppo
 	mainWindow.webContents.openDevTools();
+
+	mainWindow.loadFile('index.html');
 }
 
 app.on('ready', createWindow);
 
-app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
-});
-
-app.on('activate', () => {
-	if (BrowserWindow.getAllWindows().length === 0) {
-		createWindow();
-	}
-});
-
-const dotfiles = ['.bashrc', '.zshrc', '.vimrc'];
-
 ipcMain.handle('read-dotfiles', async () => {
 	const homedir = os.homedir();
-	let content = '';
-	for (const file of dotfiles) {
-		const filePath = path.join(homedir, file);
-		if (fs.existsSync(filePath)) {
-			const data = fs.readFileSync(filePath, 'utf-8');
-			content += `<h2>${file}</h2><pre><code class="language-bash">${data}</code></pre>`;
-		} else {
-			content += `<h2>${file}</h2><p>Non esiste.</p>`;
-		}
+	const dotfiles = ['.bashrc', '.zshrc', '.vimrc', '.gitconfig']; // List of dotfiles to check
+	return dotfiles.filter(dotfile => fs.existsSync(path.join(homedir, dotfile)));
+});
+
+ipcMain.handle('read-dotfile', async (_, dotfile: string) => {
+	const homedir = os.homedir();
+	const filePath = path.join(homedir, dotfile);
+	if (fs.existsSync(filePath)) {
+		return fs.readFileSync(filePath, 'utf-8');
+	} else {
+		return `Il dotfile ${dotfile} non esiste.`;
 	}
-	return content;
 });
