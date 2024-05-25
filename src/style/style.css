@@ -38,3 +38,8 @@ textarea {
     list-style-type: none;
     margin-bottom: 10px;
 }
+
+.file-code {
+    max-height: 300px;
+    border-radius: 6px;
+}

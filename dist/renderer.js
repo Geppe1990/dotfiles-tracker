@@ -8,7 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-// renderer.ts
 window.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const dotfiles = yield window.electron.readDotfiles();
@@ -18,37 +17,12 @@ window.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void
         const highlightedCode = document.getElementById('highlighted-code');
         const saveButton = document.getElementById('save-button');
         const fileTitle = document.getElementById('file-title');
+        const filePath = document.querySelector('.file-path');
         if (sidebar) {
             sidebar.innerHTML = ''; // Clear existing items
             dotfiles.forEach(dotfile => {
-                const listItem = document.createElement('li');
-                listItem.textContent = dotfile;
-                listItem.addEventListener('click', () => __awaiter(void 0, void 0, void 0, function* () {
-                    // Rimuovi la classe active da tutte le voci di menu
-                    const activeItem = sidebar.querySelector('.active');
-                    if (activeItem) {
-                        activeItem.classList.remove('active');
-                    }
-                    // Aggiungi la classe active alla voce di menu cliccata
-                    listItem.classList.add('active');
-                    // Leggi il contenuto del dotfile e aggiornalo nell'editor
-                    const content = yield window.electron.readDotfile(dotfile);
-                    editor.value = content;
-                    highlightedCode.textContent = content;
-                    Prism.highlightElement(highlightedCode);
-                    editorContainer.classList.add('active');
-                    editor.addEventListener('input', () => {
-                        highlightedCode.textContent = editor.value;
-                        Prism.highlightElement(highlightedCode);
-                    });
-                    saveButton.onclick = () => __awaiter(void 0, void 0, void 0, function* () {
-                        const newContent = editor.value;
-                        yield window.electron.saveDotfile(dotfile, newContent);
-                        alert('File salvato con successo!');
-                    });
-                    // Aggiungi il titolo del file
-                    fileTitle.textContent = dotfile;
-                }));
+                const listItem = createListItem(dotfile);
+                listItem.addEventListener('click', () => handleListItemClick(listItem));
                 sidebar.appendChild(listItem);
             });
         }
@@ -57,3 +31,64 @@ window.addEventListener('DOMContentLoaded', () => __awaiter(void 0, void 0, void
         console.error('Errore durante il recupero dei dotfiles:', error);
     }
 }));
+function createListItem(dotfile) {
+    const listItem = document.createElement('li');
+    listItem.textContent = dotfile;
+    return listItem;
+}
+function handleListItemClick(listItem) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const dotfile = listItem.textContent;
+        if (!dotfile) {
+            return;
+        }
+        const { path, content } = yield window.electron.readDotfile(dotfile);
+        updateEditor(content);
+        updateHighlightedCode(content);
+        updateFilePath(path);
+        updateFileTitle(dotfile);
+        addActiveClass(listItem);
+        setupEditorChangeListener();
+        setupSaveButtonClick(dotfile);
+    });
+}
+function updateEditor(content) {
+    const editor = document.getElementById('editor');
+    editor.value = content;
+}
+function updateHighlightedCode(content) {
+    const highlightedCode = document.getElementById('highlighted-code');
+    highlightedCode.textContent = content;
+    Prism.highlightElement(highlightedCode);
+}
+function updateFilePath(path) {
+    const filePath = document.querySelector('.file-path');
+    filePath.textContent = path;
+}
+function updateFileTitle(dotfile) {
+    const fileTitle = document.getElementById('file-title');
+    fileTitle.textContent = dotfile;
+}
+function addActiveClass(listItem) {
+    const activeItem = document.querySelector('.sidebar ul .active');
+    if (activeItem) {
+        activeItem.classList.remove('active');
+    }
+    listItem.classList.add('active');
+}
+function setupEditorChangeListener() {
+    const editor = document.getElementById('editor');
+    const highlightedCode = document.getElementById('highlighted-code');
+    editor.addEventListener('input', () => {
+        highlightedCode.textContent = editor.value;
+        Prism.highlightElement(highlightedCode);
+    });
+}
+function setupSaveButtonClick(dotfile) {
+    const saveButton = document.getElementById('save-button');
+    saveButton.onclick = () => __awaiter(this, void 0, void 0, function* () {
+        const newContent = document.getElementById('editor').value;
+        yield window.electron.saveDotfile(dotfile, newContent);
+        alert('File salvato con successo!');
+    });
+}

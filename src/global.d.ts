@@ -1,6 +1,6 @@
 export interface ElectronAPI {
 	readDotfiles: () => Promise<string[]>;
-	readDotfile: (dotfile: string) => Promise<string>;
+	readDotfile: (dotfile: string) => Promise<{path: string, content: string,}>;
 	saveDotfile: (dotfile: string, content: string) => Promise<void>;
 }
 

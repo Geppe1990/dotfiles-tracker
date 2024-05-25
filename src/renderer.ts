@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 		const highlightedCode = document.getElementById('highlighted-code') as HTMLElement;
 		const saveButton = document.getElementById('save-button') as HTMLButtonElement;
 		const fileTitle = document.getElementById('file-title') as HTMLHeadingElement;
+		const filePath = document.querySelector('.file-path') as HTMLPreElement;
 
 		if (sidebar) {
 			sidebar.innerHTML = '';  // Clear existing items
@@ -25,7 +26,7 @@ window.addEventListener('DOMContentLoaded', async () => {
 					listItem.classList.add('active');
 
 					// Leggi il contenuto del dotfile e aggiornalo nell'editor
-					const content = await window.electron.readDotfile(dotfile);
+					const {path, content} = await window.electron.readDotfile(dotfile);
 					editor.value = content;
 					highlightedCode.textContent = content;
 					Prism.highlightElement(highlightedCode);
@@ -44,6 +45,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 					// Aggiungi il titolo del file
 					fileTitle.textContent = dotfile;
+
+					// Aggiungo il path del file
+					filePath.textContent = path;
 				});
 				sidebar.appendChild(listItem);
 			});

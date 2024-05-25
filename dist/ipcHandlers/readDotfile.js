@@ -40,7 +40,10 @@ electron_1.ipcMain.handle('read-dotfile', (_, dotfile) => __awaiter(void 0, void
     const homedir = os.homedir();
     const filePath = path.join(homedir, dotfile);
     if (fs.existsSync(filePath)) {
-        return fs.readFileSync(filePath, 'utf-8');
+        return {
+            path: filePath,
+            content: fs.readFileSync(filePath, 'utf-8')
+        };
     }
     else {
         return `Il dotfile ${dotfile} non esiste.`;
