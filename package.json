@@ -1,0 +1,21 @@
+{
+  "name": "dotfiles-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "start": "tsc && electron .",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "electron": "^30.0.8",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "prismjs": "^1.29.0"
+  }
+}
