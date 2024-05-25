@@ -33,4 +33,6 @@ code[class*="language-"], pre[class*="language-"] {
 
 .sidebar li {
     cursor: pointer;
+    list-style-type: none;
+    margin-bottom: 10px;
 }

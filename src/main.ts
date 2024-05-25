@@ -25,7 +25,14 @@ app.on('ready', createWindow);
 
 ipcMain.handle('read-dotfiles', async () => {
 	const homedir = os.homedir();
-	const dotfiles = ['.bashrc', '.zshrc', '.vimrc', '.gitconfig']; // List of dotfiles to check
+	const dotfiles = [
+		'.bashrc', '.zshrc', '.vimrc', '.gitconfig', '.profile', '.bash_profile', '.bash_logout',
+		'.inputrc', '.nanorc', '.tmux.conf', '.screenrc', '.config/fish/config.fish',
+		'.config/nvim/init.vim', '.config/nvim/init.lua', '.p10k.zsh', '.aliases', '.functions',
+		'.exports', '.gitignore', '.gitattributes', '.wgetrc', '.curlrc', '.npmrc', '.yarnrc',
+		'.eslintrc', '.prettierrc', '.stylelintrc', '.tern-project', '.jsconfig.json',
+		'.viminfo', '.dircolors', '.cargo/config', '.rustfmt.toml', '.clang-format', '.ackrc'
+	];
 	return dotfiles.filter(dotfile => fs.existsSync(path.join(homedir, dotfile)));
 });
 
