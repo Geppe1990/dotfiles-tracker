@@ -9,7 +9,6 @@ const Navbar = () => {
 							fill="black" className="bd-svg-black"/>
 						<path fillRule="evenodd" clipRule="evenodd" d="M0 110L10 40L50 0L100 50L70 80L110 120L50 160L0 110Z" fill="#00D1B2"/>
 					</svg>
-
 				</a>
 
 				<a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

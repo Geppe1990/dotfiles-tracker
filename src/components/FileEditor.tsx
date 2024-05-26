@@ -1,6 +1,8 @@
+// src/components/FileEditor.tsx
 import React from 'react';
-import Prism from 'prismjs';
 import Breadcrumb from "./Breadcrumb";
+import TextEditor from "./TextEditor";
+import CodePreview from "./CodePreview";
 
 interface FileEditorProps {
 	currentFile: string;
@@ -11,22 +13,12 @@ interface FileEditorProps {
 }
 
 const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath, setContent, saveFile }) => {
-	React.useEffect(() => {
-		Prism.highlightAll(); // Evidenzia il codice quando il contenuto cambia
-	}, [content]);
-
 	return (
-		// TODO: Separare textarea e preview in due file separati
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath} />}
-			<textarea
-				className="textarea mb-6"
-				id="editor"
-				value={content}
-				onChange={(e) => setContent(e.target.value)}
-			/>
-			<pre className="mb-6" id="highlighted-code"><code className="language-bash">{content}</code></pre>
+			<TextEditor content={content} setContent={setContent} />
+			<CodePreview content={content} />
 			<button className="button is-primary has-text-white" id="save-button" onClick={saveFile}>
 				Save
 			</button>
