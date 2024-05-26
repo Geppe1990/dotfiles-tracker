@@ -17,8 +17,14 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath} />}
-			<TextEditor content={content} setContent={setContent} />
-			<CodePreview content={content} />
+			<div className="columns">
+				<div className="column is-half">
+					<TextEditor content={content} setContent={setContent} />
+				</div>
+				<div className="column is-half">
+					<CodePreview content={content} />
+				</div>
+			</div>
 			<button className="button is-primary has-text-white" id="save-button" onClick={saveFile}>
 				Save
 			</button>

@@ -1,3 +1,4 @@
+// src/components/TextEditor.tsx
 import React from 'react';
 
 interface TextEditorProps {
@@ -8,10 +9,11 @@ interface TextEditorProps {
 const TextEditor: React.FC<TextEditorProps> = ({ content, setContent }) => {
 	return (
 		<textarea
-			className="textarea mb-6"
+			className="textarea"
 			id="editor"
 			value={content}
 			onChange={(e) => setContent(e.target.value)}
+			style={{ height: '300px' }} // Imposta l'altezza
 		/>
 	);
 };
