@@ -20,11 +20,6 @@ body {
   cursor: pointer;
 }
 
-/*.sidebar ul li.active {*/
-/*  font-weight: bold;*/
-/*  background-color: #e0e0e0;*/
-/*}*/
-
 #editor-container {
   flex: 1;
   padding: 10px;
