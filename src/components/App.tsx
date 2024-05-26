@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import FileEditor from './FileEditor';
+import Navbar from "./Navbar";
 
 const App: React.FC = () => {
 	const [dotfiles, setDotfiles] = useState<string[]>([]);
@@ -30,8 +31,9 @@ const App: React.FC = () => {
 
 	return (
 		<div>
+			<Navbar />
 			<h1 className="title is-1">Dotfiles Tracker</h1>
-			<div className="container">
+			<div>
 				<div className="columns">
 					<div className="column is-one-quarter">
 						<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />

@@ -34,7 +34,7 @@ const Sidebar: React.FC<SidebarProps> = ({ dotfiles, onSelectFile }) => {
 						onClick={() => handleClick(file)}
 						onMouseEnter={() => handleMouseEnter(file)}
 						onMouseLeave={handleMouseLeave}
-						className={`${activeFile === file || hoveredFile === file ? activeCls : ''}`}
+						className={`${activeFile === file || hoveredFile === file ? activeCls : ''} p-2`}
 					>
 						{file}
 					</li>

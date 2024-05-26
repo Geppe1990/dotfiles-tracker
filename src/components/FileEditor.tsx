@@ -16,6 +16,7 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 	}, [content]);
 
 	return (
+		// TODO: Separare textarea e preview in due file separati
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath} />}
