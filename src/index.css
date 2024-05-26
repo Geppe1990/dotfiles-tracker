@@ -12,10 +12,6 @@ body {
   font-family: 'Fira Code', monospace;
 }
 
-.container {
-  display: flex;
-}
-
 .sidebar {
   width: 200px;
   background-color: #f4f4f4;
@@ -39,3 +35,4 @@ body {
   border-radius: 5px;
   margin-top: 10px;
 }
+

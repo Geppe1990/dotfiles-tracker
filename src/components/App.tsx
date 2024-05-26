@@ -33,14 +33,16 @@ const App: React.FC = () => {
 		<div>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			<div className="container">
-				<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
-				<FileEditor
-					currentFile={currentFile}
-					content={content}
-					filePath={filePath}
-					setContent={setContent}
-					saveFile={saveFile}
-				/>
+				<div className="is-flex is-flex-wrap-nowrap">
+					<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
+					<FileEditor
+						currentFile={currentFile}
+						content={content}
+						filePath={filePath}
+						setContent={setContent}
+						saveFile={saveFile}
+					/>
+				</div>
 			</div>
 		</div>
 	);
