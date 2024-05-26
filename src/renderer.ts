@@ -1,58 +1,31 @@
-// renderer.ts
-window.addEventListener('DOMContentLoaded', async () => {
-	try {
-		const dotfiles = await window.electron.readDotfiles();
-		const sidebar = document.querySelector('.sidebar ul');
-		const editorContainer = document.getElementById('editor-container') as HTMLDivElement;
-		const editor = document.getElementById('editor') as HTMLTextAreaElement;
-		const highlightedCode = document.getElementById('highlighted-code') as HTMLElement;
-		const saveButton = document.getElementById('save-button') as HTMLButtonElement;
-		const fileTitle = document.getElementById('file-title') as HTMLHeadingElement;
-		const filePath = document.querySelector('.file-path') as HTMLPreElement;
+/**
+ * This file will automatically be loaded by webpack and run in the "renderer" context.
+ * To learn more about the differences between the "main" and the "renderer" context in
+ * Electron, visit:
+ *
+ * https://electronjs.org/docs/latest/tutorial/process-model
+ *
+ * By default, Node.js integration in this file is disabled. When enabling Node.js integration
+ * in a renderer process, please be aware of potential security implications. You can read
+ * more about security risks here:
+ *
+ * https://electronjs.org/docs/tutorial/security
+ *
+ * To enable Node.js integration in this file, open up `main.js` and enable the `nodeIntegration`
+ * flag:
+ *
+ * ```
+ *  // Create the browser window.
+ *  mainWindow = new BrowserWindow({
+ *    width: 800,
+ *    height: 600,
+ *    webPreferences: {
+ *      nodeIntegration: true
+ *    }
+ *  });
+ * ```
+ */
+import './components/Main';
+import './index.css';
 
-		if (sidebar) {
-			sidebar.innerHTML = '';  // Clear existing items
-			dotfiles.forEach(dotfile => {
-				const listItem = document.createElement('li');
-				listItem.textContent = dotfile;
-				listItem.addEventListener('click', async () => {
-					// Rimuovi la classe active da tutte le voci di menu
-					const activeItem = sidebar.querySelector('.active');
-					if (activeItem) {
-						activeItem.classList.remove('active');
-					}
-
-					// Aggiungi la classe active alla voce di menu cliccata
-					listItem.classList.add('active');
-
-					// Leggi il contenuto del dotfile e aggiornalo nell'editor
-					const {path, content} = await window.electron.readDotfile(dotfile);
-					editor.value = content;
-					highlightedCode.textContent = content;
-					Prism.highlightElement(highlightedCode);
-					editorContainer.classList.add('active');
-
-					editor.addEventListener('input', () => {
-						highlightedCode.textContent = editor.value;
-						Prism.highlightElement(highlightedCode);
-					});
-
-					saveButton.onclick = async () => {
-						const newContent = editor.value;
-						await window.electron.saveDotfile(dotfile, newContent);
-						alert('File salvato con successo!');
-					};
-
-					// Aggiungi il titolo del file
-					fileTitle.textContent = dotfile;
-
-					// Aggiungo il path del file
-					filePath.textContent = path;
-				});
-				sidebar.appendChild(listItem);
-			});
-		}
-	} catch (error) {
-		console.error('Errore durante il recupero dei dotfiles:', error);
-	}
-});
+console.log('👋 This message is being logged by "renderer.js", included via webpack');

@@ -1,3 +1,4 @@
+// src/main/ipcHandlers/readDotfile.ts
 import { ipcMain } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
@@ -7,11 +8,9 @@ ipcMain.handle('read-dotfile', async (_, dotfile: string) => {
 	const homedir = os.homedir();
 	const filePath = path.join(homedir, dotfile);
 	if (fs.existsSync(filePath)) {
-		return {
-			path: filePath,
-			content: fs.readFileSync(filePath, 'utf-8')
-		}
+		const content = fs.readFileSync(filePath, 'utf-8');
+		return { path: filePath, content };
 	} else {
-		return `Il dotfile ${dotfile} non esiste.`;
+		return { path: filePath, content: `Il dotfile ${dotfile} non esiste.` };
 	}
 });
