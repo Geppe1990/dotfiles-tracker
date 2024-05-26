@@ -1,4 +1,3 @@
-// src/components/Main.tsx
 import React, { useEffect, useState } from 'react';
 import Prism from 'prismjs';
 import Sidebar from "./Sidebar";
