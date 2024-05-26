@@ -32,7 +32,6 @@ const App: React.FC = () => {
 		<div>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			<div className="container">
-				{/*<div className="is-flex is-flex-wrap-nowrap">*/}
 				<div className="columns">
 					<div className="column is-one-quarter">
 						<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
