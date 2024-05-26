@@ -1,6 +1,7 @@
 // src/components/Main.tsx
 import React, { useEffect, useState } from 'react';
 import Prism from 'prismjs';
+import Sidebar from "./Sidebar";
 
 const App: React.FC = () => {
 	const [dotfiles, setDotfiles] = useState<string[]>([]);
@@ -37,15 +38,7 @@ const App: React.FC = () => {
 		<div>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			<div className="container">
-				<div className="sidebar">
-					<ul>
-						{dotfiles.map((file) => (
-							<li key={file} onClick={() => openFile(file)}>
-								{file}
-							</li>
-						))}
-					</ul>
-				</div>
+				<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
 				<div id="editor-container">
 					<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
 					{content &&

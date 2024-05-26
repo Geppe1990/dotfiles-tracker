@@ -5,11 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ab80755-f085-4a1c-a5b9-7de56c66a6be" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/global.d.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ipcHandlers/readDotfiles.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/ipcHandlers/saveDotfile.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Sidebar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +58,7 @@
       <updated>1716642856607</updated>
       <workItem from="1716642857691" duration="7180000" />
       <workItem from="1716705864697" duration="108000" />
-      <workItem from="1716705973586" duration="2824000" />
+      <workItem from="1716705973586" duration="3143000" />
     </task>
     <servers />
   </component>
