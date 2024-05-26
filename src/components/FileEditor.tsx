@@ -1,5 +1,6 @@
 import React from 'react';
 import Prism from 'prismjs';
+import Breadcrumb from "./Breadcrumb";
 
 interface FileEditorProps {
 	currentFile: string;
@@ -17,7 +18,7 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 	return (
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
-			<pre className="file-path mb-6">{filePath}</pre>
+			{currentFile && <Breadcrumb path={filePath} />}
 			<textarea
 				className="textarea mb-6"
 				id="editor"
