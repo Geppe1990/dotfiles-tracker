@@ -1,4 +1,3 @@
-// src/components/App.tsx
 import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import FileEditor from './FileEditor';
@@ -33,15 +32,22 @@ const App: React.FC = () => {
 		<div>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			<div className="container">
-				<div className="is-flex is-flex-wrap-nowrap">
-					<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
-					<FileEditor
-						currentFile={currentFile}
-						content={content}
-						filePath={filePath}
-						setContent={setContent}
-						saveFile={saveFile}
-					/>
+				{/*<div className="is-flex is-flex-wrap-nowrap">*/}
+				<div className="columns">
+					<div className="column is-one-quarter">
+						<Sidebar dotfiles={dotfiles} onSelectFile={openFile} />
+					</div>
+					<div className="column is-three-quarters">
+						{content &&
+							<FileEditor
+								currentFile={currentFile}
+								content={content}
+								filePath={filePath}
+								setContent={setContent}
+								saveFile={saveFile}
+							/>
+						}
+					</div>
 				</div>
 			</div>
 		</div>
