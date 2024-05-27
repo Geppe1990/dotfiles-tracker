@@ -1,7 +1,6 @@
-// src/components/FileEditor.tsx
-import React from 'react';
+import React, { useState } from 'react';
 import Breadcrumb from "./Breadcrumb";
-import TextEditor from "./TextEditor";
+import TextEditorModal from "./TextEditorModal";
 import CodePreview from "./CodePreview";
 
 interface FileEditorProps {
@@ -13,21 +12,36 @@ interface FileEditorProps {
 }
 
 const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath, setContent, saveFile }) => {
+	const [isModalActive, setIsModalActive] = useState(false);
+
+	const openModal = () => {
+		setIsModalActive(true);
+	};
+
+	const closeModal = () => {
+		setIsModalActive(false);
+	};
+
+	const saveAndCloseModal = () => {
+		saveFile();
+		closeModal();
+	};
+
 	return (
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath} />}
-			<div className="columns">
-				<div className="column is-half">
-					<TextEditor content={content} setContent={setContent} />
-				</div>
-				<div className="column is-half">
-					<CodePreview content={content} />
-				</div>
-			</div>
-			<button className="button is-primary has-text-white" id="save-button" onClick={saveFile}>
-				Save
+			<button className="button is-primary has-text-white mb-4" onClick={openModal}>
+				Modifica
 			</button>
+			<TextEditorModal
+				isActive={isModalActive}
+				closeModal={closeModal}
+				content={content}
+				setContent={setContent}
+				saveFile={saveAndCloseModal}
+			/>
+			<CodePreview content={content} />
 		</div>
 	);
 };

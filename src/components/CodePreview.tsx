@@ -1,4 +1,3 @@
-// src/components/CodePreview.tsx
 import React, { useEffect } from 'react';
 import Prism from 'prismjs';
 
@@ -12,11 +11,9 @@ const CodePreview: React.FC<CodePreviewProps> = ({ content }) => {
 	}, [content]);
 
 	return (
-		<pre
-			className="mb-6 mt-0"
-			id="highlighted-code"
-			style={{ height: '300px', overflowY: 'auto' }}
-		><code className="language-bash">{content}</code></pre>
+		<pre className="mb-6" id="highlighted-code" style={{ height: '300px', overflowY: 'auto' }}>
+      <code className="language-bash">{content}</code>
+    </pre>
 	);
 };
 
