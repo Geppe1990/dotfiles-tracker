@@ -11,7 +11,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({ content }) => {
 	}, [content]);
 
 	return (
-		<pre className="mb-6" id="highlighted-code" style={{ height: '300px', overflowY: 'auto' }}>
+		<pre className="mb-6" id="highlighted-code" >
       <code className="language-bash">{content}</code>
     </pre>
 	);

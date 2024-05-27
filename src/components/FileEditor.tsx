@@ -30,10 +30,7 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 	return (
 		<div id="editor-container">
 			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
-			{currentFile && <Breadcrumb path={filePath} />}
-			<button className="button is-primary has-text-white mb-4" onClick={openModal}>
-				Modifica
-			</button>
+			{currentFile && <Breadcrumb path={filePath}/>}
 			<TextEditorModal
 				isActive={isModalActive}
 				closeModal={closeModal}
@@ -41,7 +38,10 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 				setContent={setContent}
 				saveFile={saveAndCloseModal}
 			/>
-			<CodePreview content={content} />
+			<CodePreview content={content}/>
+			<button className="button is-primary has-text-white mb-4" onClick={openModal}>
+				Modifica
+			</button>
 		</div>
 	);
 };

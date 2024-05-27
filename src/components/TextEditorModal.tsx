@@ -14,13 +14,12 @@ const TextEditorModal: React.FC<TextEditorModalProps> = ({ isActive, closeModal,
 			<div className="modal-background" onClick={closeModal}></div>
 			<div className="modal-content">
 				<div className="box">
-          <textarea
-			  className="textarea mb-4"
-			  id="editor"
-			  value={content}
-			  onChange={(e) => setContent(e.target.value)}
-			  style={{ height: '300px' }}
-		  />
+					<textarea
+						className="textarea mb-4"
+						id="editor"
+						value={content}
+						onChange={(e) => setContent(e.target.value)}
+					/>
 					<button className="button is-primary has-text-white" onClick={saveFile}>
 						Save
 					</button>
