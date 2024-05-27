@@ -20,12 +20,14 @@ const TextEditorModal: React.FC<TextEditorModalProps> = ({ isActive, closeModal,
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
 					/>
-					<button className="button is-primary has-text-white" onClick={saveFile}>
-						Save
-					</button>
+					<div className="buttons">
+						<button className="button is-primary has-text-white" onClick={saveFile}>
+							Save
+						</button>
+						<button className="button is-danger has-text-white" aria-label="close" onClick={closeModal}>Close</button>
+					</div>
 				</div>
 			</div>
-			<button className="modal-close is-large" aria-label="close" onClick={closeModal}></button>
 		</div>
 	);
 };

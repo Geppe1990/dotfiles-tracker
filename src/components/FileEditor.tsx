@@ -39,9 +39,9 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 				saveFile={saveAndCloseModal}
 			/>
 			<CodePreview content={content}/>
-			<button className="button is-primary has-text-white mb-4" onClick={openModal}>
-				Modifica
-			</button>
+			<div className="buttons mb-4">
+				<button className="button is-primary has-text-white" onClick={openModal}>Modifica</button>
+			</div>
 		</div>
 	);
 };

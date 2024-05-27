@@ -1,20 +1,33 @@
-import React, { useEffect } from 'react';
-import Prism from 'prismjs';
+import React from 'react';
+import {Highlight, themes} from "prism-react-renderer"
 
 interface CodePreviewProps {
 	content: string;
 }
 
-const CodePreview: React.FC<CodePreviewProps> = ({ content }) => {
-	useEffect(() => {
-		Prism.highlightAll(); // Evidenzia il codice quando il contenuto cambia
-	}, [content]);
-
+const CodePreview: React.FC<CodePreviewProps> = ({content}) => {
 	return (
-		<pre className="mb-6" id="highlighted-code" >
-      <code className="language-bash">{content}</code>
-    </pre>
-	);
+		<div className="mb-6">
+			<Highlight
+				theme={themes.vsDark}
+				code={content}
+				language="markup"
+			>
+				{({style, tokens, getLineProps, getTokenProps}) => (
+					<pre style={style}>
+						{tokens.map((line, i) => (
+							<div key={i} {...getLineProps({line})}>
+								{/*<span>{i + 1}</span>*/}
+								{line.map((token, key) => (
+									<span key={key} {...getTokenProps({token})} />
+								))}
+							</div>
+						))}
+					</pre>
+				)}
+			</Highlight>
+		</div>
+	)
 };
 
 export default CodePreview;
