@@ -39,11 +39,9 @@ const App: React.FC = () => {
 		<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>
 			<Navbar setShowSettings={setShowSettings} />
 			<h1 className="title is-1">Dotfiles Tracker</h1>
-			{showSettings ?
-				<Settings settings={settings} setShowSettings={setShowSettings} />
-				: null
-			}
-			<div>
+			{/*{showSettings ? <Settings settings={settings} setShowSettings={setShowSettings} />  : null }*/}
+			{showSettings ? <Settings setShowSettings={setShowSettings} />  : null }
+			<>
 				<div className="columns">
 					<div className="column is-one-quarter">
 						<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>
@@ -60,7 +58,7 @@ const App: React.FC = () => {
 						}
 					</div>
 				</div>
-			</div>
+			</>
 		</div>
 	);
 };

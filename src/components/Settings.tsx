@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import { updateSettings } from '../settingsSlice';
+import {RootState} from "../store";
 
 interface SettingsProps {
-	settings: any;
 	setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Settings: React.FC<SettingsProps> = ({ settings, setShowSettings }) => {
+const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 	const dispatch = useDispatch();
+	const settings = useSelector((state: RootState) => state.settings);
 	const [theme, setTheme] = useState(settings.theme || 'light');
 	const [fontSize, setFontSize] = useState(settings.fontSize || 14);
 	const [syntax, setSyntax] = useState(settings.syntax || 'bash');
