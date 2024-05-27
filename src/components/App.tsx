@@ -3,15 +3,20 @@ import Sidebar from './Sidebar';
 import FileEditor from './FileEditor';
 import Navbar from "./Navbar";
 import Settings from "./Settings";
-import { loadSettings, saveSettings } from '../helpers/SettingsManager';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState, AppDispatch } from '../store';
+import { updateSettings } from '../settingsSlice';
 
 const App: React.FC = () => {
+	const dispatch = useDispatch<AppDispatch>();
+
 	const [dotfiles, setDotfiles] = useState<string[]>([]);
 	const [currentFile, setCurrentFile] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [filePath, setFilePath] = useState<string>('');
-	const [settings, setSettings] = useState(loadSettings());
 	const [showSettings, setShowSettings] = useState(false);
+	const settings = useSelector((state: RootState) => state.settings);
+
 
 	useEffect(() => {
 		const fetchDotfiles = async () => {
@@ -22,8 +27,7 @@ const App: React.FC = () => {
 	}, []);
 
 	const handleSaveSettings = (newSettings: any) => {
-		setSettings(newSettings);
-		saveSettings(newSettings);
+		dispatch(updateSettings(newSettings));
 	};
 
 	const openFile = async (file: string) => {
