@@ -1,5 +1,6 @@
+- Gestire le impostazioni in una modale
+- Gestire le impostazioni, rimuovere font size e gestire switch tra light-mode e dark-mode
 - Inserire configurazione dove inserire lista file
-- Creare comando watch
 
 ### Funzionalità da implementare
 - Cerca nei dotfile: Aggiungi la possibilità di cercare all'interno dei dotfile per trovare rapidamente parti di testo specifiche.

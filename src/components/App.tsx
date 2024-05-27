@@ -44,7 +44,7 @@ const App: React.FC = () => {
 			<button className="button" onClick={() => setShowSettings(true)}>Settings</button>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			{showSettings ?
-				<Settings settings={settings} saveSettings={handleSaveSettings} />
+				<Settings settings={settings} saveSettings={handleSaveSettings} setShowSettings={setShowSettings} />
 				:
 				<div>
 					<div className="columns">

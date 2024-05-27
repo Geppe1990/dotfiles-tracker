@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 interface SettingsProps {
 	settings: any;
 	saveSettings: (newSettings: any) => void;
+	setShowSettings:  React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const Settings: React.FC<SettingsProps> = ({ settings, saveSettings }) => {
+const Settings: React.FC<SettingsProps> = ({ settings, saveSettings, setShowSettings }) => {
 	const [theme, setTheme] = useState(settings.theme || 'light');
 	const [fontSize, setFontSize] = useState(settings.fontSize || 14);
 
@@ -40,7 +41,10 @@ const Settings: React.FC<SettingsProps> = ({ settings, saveSettings }) => {
 					</p>
 				</div>
 			</div>
-			<button className="button is-primary has-text-white" onClick={handleSave}>Save</button>
+			<button className="button is-primary has-text-white" onClick={() => {
+				handleSave()
+				setShowSettings(false)
+			}}>Save</button>
 		</div>
 	);
 };
