@@ -1,4 +1,3 @@
-- Gestire le impostazioni in una modale
 - Gestire le impostazioni, rimuovere font size e gestire switch tra light-mode e dark-mode
 - Inserire configurazione dove inserire lista file
 

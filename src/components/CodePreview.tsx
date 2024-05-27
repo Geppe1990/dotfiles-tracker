@@ -11,7 +11,7 @@ const CodePreview: React.FC<CodePreviewProps> = ({content}) => {
 			<Highlight
 				theme={themes.vsDark}
 				code={content}
-				language="markup"
+				language="javascript"
 			>
 				{({style, tokens, getLineProps, getTokenProps}) => (
 					<pre style={style}>

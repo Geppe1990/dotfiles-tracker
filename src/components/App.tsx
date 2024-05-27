@@ -39,32 +39,32 @@ const App: React.FC = () => {
 	};
 
 	return (
-		<div>
+		<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>
 			<Navbar/>
 			<button className="button" onClick={() => setShowSettings(true)}>Settings</button>
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			{showSettings ?
 				<Settings settings={settings} saveSettings={handleSaveSettings} setShowSettings={setShowSettings} />
-				:
-				<div>
-					<div className="columns">
-						<div className="column is-one-quarter">
-							<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>
-						</div>
-						<div className="column is-three-quarters">
-							{content &&
-								<FileEditor
-									currentFile={currentFile}
-									content={content}
-									filePath={filePath}
-									setContent={setContent}
-									saveFile={saveFile}
-								/>
-							}
-						</div>
+				: null
+			}
+			<div>
+				<div className="columns">
+					<div className="column is-one-quarter">
+						<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>
+					</div>
+					<div className="column is-three-quarters">
+						{content &&
+							<FileEditor
+								currentFile={currentFile}
+								content={content}
+								filePath={filePath}
+								setContent={setContent}
+								saveFile={saveFile}
+							/>
+						}
 					</div>
 				</div>
-			}
+			</div>
 		</div>
 	);
 };
