@@ -26,10 +26,6 @@ const App: React.FC = () => {
 		fetchDotfiles();
 	}, []);
 
-	const handleSaveSettings = (newSettings: any) => {
-		dispatch(updateSettings(newSettings));
-	};
-
 	const openFile = async (file: string) => {
 		const { path, content } = await window.electron.readDotfile(file);
 		setCurrentFile(file);
@@ -47,7 +43,7 @@ const App: React.FC = () => {
 			<Navbar setShowSettings={setShowSettings} />
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			{showSettings ?
-				<Settings settings={settings} saveSettings={handleSaveSettings} setShowSettings={setShowSettings} />
+				<Settings settings={settings} setShowSettings={setShowSettings} />
 				: null
 			}
 			<div>

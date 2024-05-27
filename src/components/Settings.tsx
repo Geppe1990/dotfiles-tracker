@@ -5,11 +5,10 @@ import { updateSettings } from '../settingsSlice';
 
 interface SettingsProps {
 	settings: any;
-	saveSettings: (newSettings: any) => void;
 	setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Settings: React.FC<SettingsProps> = ({ settings, saveSettings, setShowSettings }) => {
+const Settings: React.FC<SettingsProps> = ({ settings, setShowSettings }) => {
 	const dispatch = useDispatch();
 	const [theme, setTheme] = useState(settings.theme || 'light');
 	const [fontSize, setFontSize] = useState(settings.fontSize || 14);
@@ -21,7 +20,6 @@ const Settings: React.FC<SettingsProps> = ({ settings, saveSettings, setShowSett
 	const handleSave = () => {
 		const newSettings = { theme, fontSize, syntax, fontFamily, tabSize, showLineNumbers };
 		dispatch(updateSettings(newSettings));
-		saveSettings(newSettings);
 		setShowSettings(false);
 	};
 
