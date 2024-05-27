@@ -3,13 +3,10 @@ import Sidebar from './Sidebar';
 import FileEditor from './FileEditor';
 import Navbar from "./Navbar";
 import Settings from "./Settings";
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../store';
-import { updateSettings } from '../settingsSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
 
 const App: React.FC = () => {
-	const dispatch = useDispatch<AppDispatch>();
-
 	const [dotfiles, setDotfiles] = useState<string[]>([]);
 	const [currentFile, setCurrentFile] = useState<string>('');
 	const [content, setContent] = useState<string>('');
