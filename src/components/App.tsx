@@ -40,8 +40,8 @@ const App: React.FC = () => {
 
 	return (
 		<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>
-			<Navbar/>
-			<button className="button" onClick={() => setShowSettings(true)}>Settings</button>
+			<Navbar setShowSettings={setShowSettings} />
+			{/*<button className="button" onClick={() => setShowSettings(true)}>Settings</button>*/}
 			<h1 className="title is-1">Dotfiles Tracker</h1>
 			{showSettings ?
 				<Settings settings={settings} saveSettings={handleSaveSettings} setShowSettings={setShowSettings} />

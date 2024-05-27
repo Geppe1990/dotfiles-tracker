@@ -1,4 +1,10 @@
-const Navbar = () => {
+import React from "react";
+
+interface NavbarProps {
+	setShowSettings: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const Navbar: React.FC<NavbarProps> = ({ setShowSettings }) => {
 	return (
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
@@ -55,12 +61,9 @@ const Navbar = () => {
 				<div className="navbar-end">
 					<div className="navbar-item">
 						<div className="buttons">
-							<a className="button is-primary">
-								<strong>Sign up</strong>
-							</a>
-							<a className="button is-light">
-								Log in
-							</a>
+							<button className="button is-primary has-text-white" onClick={() => setShowSettings(true)}>
+								Settings
+							</button>
 						</div>
 					</div>
 				</div>
