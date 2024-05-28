@@ -46,6 +46,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui/react-components": "^9.53.0",
+    "@fontsource/fira-code": "^5.0.18",
     "@reduxjs/toolkit": "^2.2.5",
     "electron-squirrel-startup": "^1.0.1",
     "prism-react-renderer": "^2.3.1",

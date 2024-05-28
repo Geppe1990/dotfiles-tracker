@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import FileEditor from './FileEditor';
 import Navbar from "./Navbar";
-import Settings from "./Settings";
-import { useSelector } from 'react-redux';
-import { RootState } from '../store';
 import {makeStyles} from "@fluentui/react-components";
+import '@fontsource/fira-code';
+
 
 const useStyles = makeStyles({
 	root: {
@@ -23,8 +22,6 @@ const App: React.FC = () => {
 	const [currentFile, setCurrentFile] = useState<string>('');
 	const [content, setContent] = useState<string>('');
 	const [filePath, setFilePath] = useState<string>('');
-	const [showSettings, setShowSettings] = useState(false);
-	const settings = useSelector((state: RootState) => state.settings);
 
 
 	useEffect(() => {

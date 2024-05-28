@@ -10,7 +10,7 @@ interface CodePreviewProps {
 
 const useStyles = makeStyles({
 	pre: {
-		padding: "10px"
+		padding: "10px",
 	}
 });
 
@@ -26,7 +26,14 @@ const CodePreview: React.FC<CodePreviewProps> = ({content}) => {
 				language="javascript"
 			>
 				{({style, tokens, getLineProps, getTokenProps}) => (
-					<pre style={style} className={styles.pre}>
+					<pre
+						style={{
+							...style,
+							fontFamily: settings.fontFamily,
+							fontSize: settings.fontSize,
+						}}
+						className={styles.pre}
+					>
 						{tokens.map((line, i) => (
 							<div key={i} {...getLineProps({line})}>
 								{settings.showLineNumbers &&

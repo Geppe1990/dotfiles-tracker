@@ -50,7 +50,6 @@ const Settings: React.FC = () => {
 	const selectId = useId();
 	const inputId = useId();
 
-
 	return (
 		<>
 			<DialogContent>
