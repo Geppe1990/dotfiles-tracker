@@ -1,4 +1,6 @@
 import React from 'react';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClose, faSave} from "@fortawesome/free-solid-svg-icons";
 
 interface TextEditorModalProps {
 	isActive: boolean;
@@ -22,9 +24,13 @@ const TextEditorModal: React.FC<TextEditorModalProps> = ({ isActive, closeModal,
 					/>
 					<div className="buttons">
 						<button className="button is-primary has-text-white" onClick={saveFile}>
+							<FontAwesomeIcon icon={faSave} />&nbsp;
 							Save
 						</button>
-						<button className="button is-danger has-text-white" aria-label="close" onClick={closeModal}>Close</button>
+						<button className="button is-danger has-text-white" aria-label="close" onClick={closeModal}>
+							<FontAwesomeIcon icon={faClose} />&nbsp;
+							Close
+						</button>
 					</div>
 				</div>
 			</div>

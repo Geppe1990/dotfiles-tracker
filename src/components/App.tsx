@@ -38,8 +38,6 @@ const App: React.FC = () => {
 	return (
 		<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>
 			<Navbar setShowSettings={setShowSettings} />
-			<h1 className="title is-1">Dotfiles Tracker</h1>
-			{/*{showSettings ? <Settings settings={settings} setShowSettings={setShowSettings} />  : null }*/}
 			{showSettings ? <Settings setShowSettings={setShowSettings} />  : null }
 			<>
 				<div className="columns">

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Breadcrumb from "./Breadcrumb";
 import TextEditorModal from "./TextEditorModal";
 import CodePreview from "./CodePreview";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEdit} from "@fortawesome/free-solid-svg-icons";
 
 interface FileEditorProps {
 	currentFile: string;
@@ -40,7 +42,10 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 			/>
 			<CodePreview content={content}/>
 			<div className="buttons mb-4">
-				<button className="button is-primary has-text-white" onClick={openModal}>Modifica</button>
+				<button className="button is-primary has-text-white" onClick={openModal}>
+					<FontAwesomeIcon icon={faEdit} />&nbsp;
+					Modifica
+				</button>
 			</div>
 		</div>
 	);
