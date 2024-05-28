@@ -24,15 +24,15 @@ const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 	};
 
 	return (
-		<div className="modal is-active">
-			<div className="modal-background" onClick={() => setShowSettings(false)}></div>
-			<div className="modal-content">
-				<div className="box">
-					<h2 className="title is-2">Settings</h2>
-					<div className="field">
-						<label className="label">Theme</label>
-						<div className="control">
-							<div className="select">
+		<div>
+			<div onClick={() => setShowSettings(false)}></div>
+			<div>
+				<div>
+					<h2>Settings</h2>
+					<div>
+						<label>Theme</label>
+						<div>
+							<div>
 								<select value={theme} onChange={(e) => setTheme(e.target.value)}>
 									<option value="light">Light</option>
 									<option value="dark">Dark</option>
@@ -40,21 +40,20 @@ const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 							</div>
 						</div>
 					</div>
-					<div className="field">
-						<label className="label">Font Size</label>
-						<p className="control is-inline-block">
+					<div>
+						<label>Font Size</label>
+						<p >
 							<input
 								type="number"
-								className="input"
 								value={fontSize}
 								onChange={(e) => setFontSize(parseInt(e.target.value))}
 							/>
 						</p>
 					</div>
-					<div className="field">
-						<label className="label">Syntax</label>
-						<div className="control">
-							<div className="select">
+					<div>
+						<label>Syntax</label>
+						<div>
+							<div>
 								<select value={syntax} onChange={(e) => setSyntax(e.target.value)}>
 									<option value="bash">Bash</option>
 									<option value="javascript">JavaScript</option>
@@ -64,31 +63,29 @@ const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 							</div>
 						</div>
 					</div>
-					<div className="field">
-						<label className="label">Font Family</label>
-						<p className="control is-inline-block">
+					<div>
+						<label>Font Family</label>
+						<p>
 							<input
 								type="text"
-								className="input"
 								value={fontFamily}
 								onChange={(e) => setFontFamily(e.target.value)}
 							/>
 						</p>
 					</div>
-					<div className="field">
-						<label className="label">Tab Size</label>
-						<p className="control is-inline-block">
+					<div>
+						<label>Tab Size</label>
+						<p >
 							<input
 								type="number"
-								className="input"
 								value={tabSize}
 								onChange={(e) => setTabSize(parseInt(e.target.value))}
 							/>
 						</p>
 					</div>
-					<div className="field">
-						<label className="label">Show Line Numbers</label>
-						<p className="control">
+					<div>
+						<label>Show Line Numbers</label>
+						<p>
 							<input
 								type="checkbox"
 								checked={showLineNumbers}
@@ -96,10 +93,10 @@ const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 							/>
 						</p>
 					</div>
-					<button className="button is-primary has-text-white" onClick={handleSave}>Save</button>
+					<button onClick={handleSave}>Save</button>
 				</div>
 			</div>
-			<button className="modal-close is-large" aria-label="close" onClick={() => setShowSettings(false)}></button>
+			<button aria-label="close" onClick={() => setShowSettings(false)}></button>
 		</div>
 	);
 };

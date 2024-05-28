@@ -5,6 +5,17 @@ import Navbar from "./Navbar";
 import Settings from "./Settings";
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
+import {makeStyles} from "@fluentui/react-components";
+
+const useStyles = makeStyles({
+	root: {
+		fontFamily: "Fira Code', monospace"
+	},
+	contentWrapper: {
+		display: "flex"
+	}
+});
+
 
 const App: React.FC = () => {
 	const [dotfiles, setDotfiles] = useState<string[]>([]);
@@ -35,26 +46,25 @@ const App: React.FC = () => {
 		alert('File salvato con successo!');
 	};
 
+	const styles = useStyles();
+
 	return (
-		<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>
+		<div className={styles.root}>
+			{/*<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>*/}
 			<Navbar setShowSettings={setShowSettings} />
 			{showSettings ? <Settings setShowSettings={setShowSettings} />  : null }
 			<>
-				<div className="columns">
-					<div className="column is-one-quarter">
-						<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>
-					</div>
-					<div className="column is-three-quarters">
-						{content &&
-							<FileEditor
-								currentFile={currentFile}
-								content={content}
-								filePath={filePath}
-								setContent={setContent}
-								saveFile={saveFile}
-							/>
-						}
-					</div>
+				<div className={styles.contentWrapper}>
+					<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>
+					{content &&
+						<FileEditor
+							currentFile={currentFile}
+							content={content}
+							filePath={filePath}
+							setContent={setContent}
+							saveFile={saveFile}
+						/>
+					}
 				</div>
 			</>
 		</div>

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Breadcrumb from "./Breadcrumb";
 import TextEditorModal from "./TextEditorModal";
 import CodePreview from "./CodePreview";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEdit} from "@fortawesome/free-solid-svg-icons";
+import {Button, makeStyles, shorthands} from "@fluentui/react-components";
+import {TextEditStyleFilled} from "@fluentui/react-icons";
 
 interface FileEditorProps {
 	currentFile: string;
@@ -12,6 +12,13 @@ interface FileEditorProps {
 	setContent: React.Dispatch<React.SetStateAction<string>>;
 	saveFile: () => void;
 }
+
+const useStyles = makeStyles({
+	root: {
+		flexBasis: "90%",
+		...shorthands.padding("0", "20px"),
+	},
+});
 
 const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath, setContent, saveFile }) => {
 	const [isModalActive, setIsModalActive] = useState(false);
@@ -29,9 +36,11 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 		closeModal();
 	};
 
+	const styles = useStyles();
+
 	return (
-		<div id="editor-container">
-			<h2 className="title is-2 mb-6" id="file-title">{currentFile}</h2>
+		<div className={styles.root}>
+			<h2>{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath}/>}
 			<TextEditorModal
 				isActive={isModalActive}
@@ -41,11 +50,11 @@ const FileEditor: React.FC<FileEditorProps> = ({ currentFile, content, filePath,
 				saveFile={saveAndCloseModal}
 			/>
 			<CodePreview content={content}/>
-			<div className="buttons mb-4">
-				<button className="button is-primary has-text-white" onClick={openModal}>
-					<FontAwesomeIcon icon={faEdit} />&nbsp;
+			<div>
+				<Button onClick={openModal} appearance="primary">
+					<TextEditStyleFilled />&nbsp;
 					Modifica
-				</button>
+				</Button>
 			</div>
 		</div>
 	);

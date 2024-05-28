@@ -1,6 +1,6 @@
 import React from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClose, faSave} from "@fortawesome/free-solid-svg-icons";
+import {Button, makeStyles, shorthands, Textarea} from "@fluentui/react-components";
+import {SaveFilled, DismissSquareFilled} from "@fluentui/react-icons";
 
 interface TextEditorModalProps {
 	isActive: boolean;
@@ -10,27 +10,34 @@ interface TextEditorModalProps {
 	saveFile: () => void;
 }
 
+const useStyles = makeStyles({
+	button: {
+		marginRight: "10px"
+	},
+});
+
 const TextEditorModal: React.FC<TextEditorModalProps> = ({ isActive, closeModal, content, setContent, saveFile }) => {
+	const styles = useStyles();
+
 	return (
 		<div className={`modal ${isActive ? 'is-active' : ''}`}>
-			<div className="modal-background" onClick={closeModal}></div>
-			<div className="modal-content">
-				<div className="box">
-					<textarea
-						className="textarea mb-4"
+			<div onClick={closeModal}></div>
+			<div>
+				<div>
+					<Textarea
 						id="editor"
 						value={content}
 						onChange={(e) => setContent(e.target.value)}
 					/>
-					<div className="buttons">
-						<button className="button is-primary has-text-white" onClick={saveFile}>
-							<FontAwesomeIcon icon={faSave} />&nbsp;
+					<div>
+						<Button onClick={saveFile} appearance="primary" className={styles.button}>
+							<SaveFilled />&nbsp;
 							Save
-						</button>
-						<button className="button is-danger has-text-white" aria-label="close" onClick={closeModal}>
-							<FontAwesomeIcon icon={faClose} />&nbsp;
+						</Button>
+						<Button aria-label="close" onClick={closeModal} appearance="secondary" className={styles.button}>
+							<DismissSquareFilled />&nbsp;
 							Close
-						</button>
+						</Button>
 					</div>
 				</div>
 			</div>
