@@ -52,8 +52,7 @@ const App: React.FC = () => {
 	return (
 		<div className={styles.root}>
 			{/*<div className={settings.theme === 'dark' ? 'dark-mode' : 'light-mode'}>*/}
-			<Navbar setShowSettings={setShowSettings} />
-			{showSettings ? <Settings setShowSettings={setShowSettings} />  : null }
+			<Navbar />
 			<>
 				<div className={styles.contentWrapper}>
 					<Sidebar dotfiles={dotfiles} onSelectFile={openFile}/>

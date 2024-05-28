@@ -1,13 +1,37 @@
-import React, { useState } from 'react';
+import React, {useId, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { updateSettings } from '../settingsSlice';
+import {updateSettings} from '../settingsSlice';
 import {RootState} from "../store";
+import {
+	Button,
+	DialogTrigger,
+	DialogContent,
+	DialogActions,
+	Select,
+	Label,
+	Input,
+	makeStyles, Checkbox
+} from "@fluentui/react-components";
+import {SaveFilled} from "@fluentui/react-icons";
 
-interface SettingsProps {
-	setShowSettings: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const useStyles = makeStyles({
+	formElement: {
+		display: "flex",
+		flexDirection: "column",
+		marginBottom: "20px",
+	},
+	formElementInline: {
+		display: "flex",
+		flexDirection: "row",
+		marginBottom: "20px",
+		alignItems: "center"
+	},
+	label: {
+		marginBottom: "10px"
+	},
+});
 
-const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
+const Settings: React.FC = () => {
 	const dispatch = useDispatch();
 	const settings = useSelector((state: RootState) => state.settings);
 	const [theme, setTheme] = useState(settings.theme || 'light');
@@ -18,87 +42,72 @@ const Settings: React.FC<SettingsProps> = ({ setShowSettings }) => {
 	const [showLineNumbers, setShowLineNumbers] = useState(settings.showLineNumbers !== undefined ? settings.showLineNumbers : true);
 
 	const handleSave = () => {
-		const newSettings = { theme, fontSize, syntax, fontFamily, tabSize, showLineNumbers };
+		const newSettings = {theme, fontSize, syntax, fontFamily, tabSize, showLineNumbers};
 		dispatch(updateSettings(newSettings));
-		setShowSettings(false);
 	};
+	const styles = useStyles();
+
+	const selectId = useId();
+	const inputId = useId();
+
 
 	return (
-		<div>
-			<div onClick={() => setShowSettings(false)}></div>
-			<div>
-				<div>
-					<h2>Settings</h2>
-					<div>
-						<label>Theme</label>
-						<div>
-							<div>
-								<select value={theme} onChange={(e) => setTheme(e.target.value)}>
-									<option value="light">Light</option>
-									<option value="dark">Dark</option>
-								</select>
-							</div>
-						</div>
+		<>
+			<DialogContent>
+				<>
+					<div className={styles.formElement}>
+						<Label className={styles.label} htmlFor={selectId}>Color</Label>
+						<Select id={selectId} onChange={(e) => setTheme(e.target.value)} value={theme}>
+							<option value="light">Light</option>
+							<option value="dark">Dark</option>
+						</Select>
 					</div>
-					<div>
-						<label>Font Size</label>
-						<p >
-							<input
-								type="number"
-								value={fontSize}
-								onChange={(e) => setFontSize(parseInt(e.target.value))}
-							/>
-						</p>
+					<div className={styles.formElement}>
+						<Label htmlFor={inputId} className={styles.label}>
+							Font Size
+						</Label>
+						<Input id={inputId} type="number" value={fontSize.toString()} onChange={(e) => setFontSize(parseInt(e.target.value))}/>
 					</div>
-					<div>
-						<label>Syntax</label>
-						<div>
-							<div>
-								<select value={syntax} onChange={(e) => setSyntax(e.target.value)}>
-									<option value="bash">Bash</option>
-									<option value="javascript">JavaScript</option>
-									<option value="python">Python</option>
-									<option value="html">HTML</option>
-								</select>
-							</div>
-						</div>
+					<div className={styles.formElement}>
+						<Label htmlFor={selectId} className={styles.label}>Syntax</Label>
+						<Select id={selectId} onChange={(e) => setSyntax(e.target.value)} value={syntax}>
+							<option value="bash">Bash</option>
+							<option value="javascript">JavaScript</option>
+							<option value="python">Python</option>
+							<option value="html">HTML</option>
+						</Select>
 					</div>
-					<div>
-						<label>Font Family</label>
-						<p>
-							<input
-								type="text"
-								value={fontFamily}
-								onChange={(e) => setFontFamily(e.target.value)}
-							/>
-						</p>
+					<div className={styles.formElement}>
+						<Label htmlFor={inputId} className={styles.label}>
+							Font Family
+						</Label>
+						<Input id={inputId} type="text" value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}/>
 					</div>
-					<div>
-						<label>Tab Size</label>
-						<p >
-							<input
-								type="number"
-								value={tabSize}
-								onChange={(e) => setTabSize(parseInt(e.target.value))}
-							/>
-						</p>
+					<div className={styles.formElement}>
+						<Label htmlFor={inputId} className={styles.label}>
+							Font Size
+						</Label>
+						<Input id={inputId} type="number" value={tabSize.toString()} onChange={(e) => setTabSize(parseInt(e.target.value))}/>
 					</div>
-					<div>
-						<label>Show Line Numbers</label>
-						<p>
-							<input
-								type="checkbox"
-								checked={showLineNumbers}
-								onChange={(e) => setShowLineNumbers(e.target.checked)}
-							/>
-						</p>
+					<div className={styles.formElementInline}>
+						<Label>Show Line Numbers</Label>
+						<Checkbox checked={showLineNumbers} onChange={(e) => setShowLineNumbers(e.target.checked)} />
 					</div>
-					<button onClick={handleSave}>Save</button>
-				</div>
-			</div>
-			<button aria-label="close" onClick={() => setShowSettings(false)}></button>
-		</div>
-	);
+				</>
+			</DialogContent>
+			<DialogActions>
+				<DialogTrigger disableButtonEnhancement>
+					<Button appearance="secondary">Close</Button>
+				</DialogTrigger>
+				<DialogTrigger disableButtonEnhancement>
+					<Button onClick={handleSave} appearance="primary">
+						<SaveFilled/>&nbsp;
+						Save
+					</Button>
+				</DialogTrigger>
+			</DialogActions>
+		</>
+	)
 };
 
 export default Settings;

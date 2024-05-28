@@ -7,9 +7,10 @@
     <list default="true" id="2ab80755-f085-4a1c-a5b9-7de56c66a6be" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Breadcrumb.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Breadcrumb.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/FileEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/FileEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TextEditorModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TextEditorModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Settings.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Settings.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +63,8 @@
       <workItem from="1716642857691" duration="7180000" />
       <workItem from="1716705864697" duration="108000" />
       <workItem from="1716705973586" duration="9838000" />
-      <workItem from="1716893102577" duration="3185000" />
+      <workItem from="1716893102577" duration="3218000" />
+      <workItem from="1716900148274" duration="3612000" />
     </task>
     <servers />
   </component>

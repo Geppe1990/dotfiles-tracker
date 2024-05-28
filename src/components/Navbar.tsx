@@ -1,10 +1,15 @@
 import React from "react";
-import {Button, makeStyles} from "@fluentui/react-components";
+import {
+	Button,
+	Dialog,
+	DialogBody,
+	DialogSurface,
+	DialogTitle,
+	DialogTrigger,
+	makeStyles
+} from "@fluentui/react-components";
 import { SettingsRegular } from "@fluentui/react-icons";
-
-interface NavbarProps {
-	setShowSettings: React.Dispatch<React.SetStateAction<boolean>>
-}
+import Settings from "./Settings";
 
 const useStyles = makeStyles({
 	root: {
@@ -15,17 +20,25 @@ const useStyles = makeStyles({
 	}
 });
 
-const Navbar: React.FC<NavbarProps> = ({ setShowSettings }) => {
+const Navbar: React.FC = () => {
 	const styles = useStyles();
 
 	return (
 		<nav role="navigation" aria-label="main navigation" className={styles.root}>
 			<h1>Dotfiles tracker</h1>
 			<div>
-				<Button onClick={() => setShowSettings(true)} appearance="primary">
-					<SettingsRegular />&nbsp;
-					Settings
-				</Button>
+				<Dialog>
+					<DialogTrigger disableButtonEnhancement>
+						<Button appearance="primary"><SettingsRegular />&nbsp;Settings</Button>
+					</DialogTrigger>
+					<DialogSurface>
+						<DialogBody>
+							<DialogTitle>Settings</DialogTitle>
+							<Settings />
+						</DialogBody>
+					</DialogSurface>
+				</Dialog>
+
 			</div>
 		</nav>
 	)
