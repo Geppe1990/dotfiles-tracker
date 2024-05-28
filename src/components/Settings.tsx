@@ -61,7 +61,7 @@ const SelectSetting: React.FC<SelectSettingProps> = ({ options, callback, data }
 		<div className={styles.formElement}>
 			<Label className={styles.label} htmlFor={selectId}>Color</Label>
 			<Select id={selectId} onChange={(e) => callback(e.target.value)} value={data}>
-				{options.map((el) => <option value={el.value}>{el.label}</option>)}
+				{options.map((el, index) => <option key={index} value={el.value}>{el.label}</option>)}
 			</Select>
 		</div>
 	)
