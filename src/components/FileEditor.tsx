@@ -9,7 +9,6 @@ import {SaveFilled} from "@fluentui/react-icons";
 import {Controlled as CodeMirror} from "react-codemirror2";
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/material.css';
-// TODO: Fai controllo qui
 import 'codemirror/mode/javascript/javascript';
 
 interface FileEditorProps {
@@ -37,7 +36,6 @@ const FileEditor: React.FC<FileEditorProps> = ({currentFile, content, filePath, 
 		<div className={styles.root}>
 			<h2>{currentFile}</h2>
 			{currentFile && <Breadcrumb path={filePath}/>}
-			npm i --save-dev @types/codemirror
 			<CodeMirror
 				className={styles.editor}
 				value={content}

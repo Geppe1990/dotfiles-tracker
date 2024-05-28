@@ -1,3 +1,4 @@
+- In FileEditor.tsx passare a Codemirror V3 https://raw.githack.com/uiwjs/react-codemirror/doc3/index.html
 - Gestire le impostazioni, rimuovere font size e gestire switch tra light-mode e dark-mode
 - Inserire configurazione dove inserire lista file
 
