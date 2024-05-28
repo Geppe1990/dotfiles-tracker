@@ -31,6 +31,69 @@ const useStyles = makeStyles({
 	},
 });
 
+interface SelectSettingProps {
+	options: {
+		value: string,
+		label: string
+	}[],
+	callback: (value: string) => void,
+	data: string
+}
+
+interface InputSettingProps {
+	type: "number" | "text",
+	value: string,
+	callback: (value: React.SetStateAction<number | string>) => void,
+	label: string
+}
+
+interface CheckboxSettingProps {
+	value: boolean,
+	label: string,
+	callback: (value: React.SetStateAction<boolean>) => void
+}
+
+const SelectSetting: React.FC<SelectSettingProps> = ({ options, callback, data }) => {
+	const styles = useStyles();
+	const selectId = useId();
+
+	return(
+		<div className={styles.formElement}>
+			<Label className={styles.label} htmlFor={selectId}>Color</Label>
+			<Select id={selectId} onChange={(e) => callback(e.target.value)} value={data}>
+				{options.map((el) => <option value={el.value}>{el.label}</option>)}
+			</Select>
+		</div>
+	)
+}
+
+const InputSetting: React.FC<InputSettingProps> = ({ type, value, callback, label }) => {
+	const styles = useStyles();
+	const inputId = useId();
+
+	return (
+		<div className={styles.formElement}>
+			<Label htmlFor={inputId} className={styles.label}>{label}</Label>
+			<Input
+				id={inputId}
+				type={type}
+				value={value}
+				onChange={(e) => callback(parseInt(e.target.value))}
+			/>
+		</div>
+	)
+}
+
+const CheckboxSetting: React.FC<CheckboxSettingProps> = ({ value, label, callback}) => {
+	const styles = useStyles();
+	return (
+		<div className={styles.formElementInline}>
+			<Label>{label}</Label>
+			<Checkbox checked={value} onChange={(e) => callback(e.target.checked)}/>
+		</div>
+	)
+}
+
 const Settings: React.FC = () => {
 	const dispatch = useDispatch();
 	const settings = useSelector((state: RootState) => state.settings);
@@ -45,53 +108,29 @@ const Settings: React.FC = () => {
 		const newSettings = {theme, fontSize, syntax, fontFamily, tabSize, showLineNumbers};
 		dispatch(updateSettings(newSettings));
 	};
-	const styles = useStyles();
 
-	const selectId = useId();
-	const inputId = useId();
+	const themeData = [
+		{value: "light", label: "Light"},
+		{value: "dark", label: "Dark"}
+	]
+
+	const syntaxData = [
+		{value: "bash", label: "Bash"},
+		{value: "javascript", label: "JavaScript"},
+		{value: "python", label: "Python"},
+		{value: "html", label: "HTML"},
+	]
 
 	return (
 		<>
 			<DialogContent>
 				<>
-					<div className={styles.formElement}>
-						<Label className={styles.label} htmlFor={selectId}>Color</Label>
-						<Select id={selectId} onChange={(e) => setTheme(e.target.value)} value={theme}>
-							<option value="light">Light</option>
-							<option value="dark">Dark</option>
-						</Select>
-					</div>
-					<div className={styles.formElement}>
-						<Label htmlFor={inputId} className={styles.label}>
-							Font Size
-						</Label>
-						<Input id={inputId} type="number" value={fontSize.toString()} onChange={(e) => setFontSize(parseInt(e.target.value))}/>
-					</div>
-					<div className={styles.formElement}>
-						<Label htmlFor={selectId} className={styles.label}>Syntax</Label>
-						<Select id={selectId} onChange={(e) => setSyntax(e.target.value)} value={syntax}>
-							<option value="bash">Bash</option>
-							<option value="javascript">JavaScript</option>
-							<option value="python">Python</option>
-							<option value="html">HTML</option>
-						</Select>
-					</div>
-					<div className={styles.formElement}>
-						<Label htmlFor={inputId} className={styles.label}>
-							Font Family
-						</Label>
-						<Input id={inputId} type="text" value={fontFamily} onChange={(e) => setFontFamily(e.target.value)}/>
-					</div>
-					<div className={styles.formElement}>
-						<Label htmlFor={inputId} className={styles.label}>
-							Font Size
-						</Label>
-						<Input id={inputId} type="number" value={tabSize.toString()} onChange={(e) => setTabSize(parseInt(e.target.value))}/>
-					</div>
-					<div className={styles.formElementInline}>
-						<Label>Show Line Numbers</Label>
-						<Checkbox checked={showLineNumbers} onChange={(e) => setShowLineNumbers(e.target.checked)} />
-					</div>
+					<SelectSetting options={themeData} callback={setTheme} data={theme} />
+					<InputSetting type={"number"} value={fontSize.toString()} callback={setFontSize} label={"Font size"} />
+					<SelectSetting options={syntaxData} callback={setSyntax} data={syntax} />
+					<InputSetting type={"text"} value={fontFamily} callback={setFontFamily} label={"Font family"} />
+					<InputSetting type={"number"} value={tabSize.toString()} callback={setTabSize} label={"Tab size"} />
+					<CheckboxSetting value={showLineNumbers} label={"Show Line Numbers"} callback={setShowLineNumbers} />
 				</>
 			</DialogContent>
 			<DialogActions>
@@ -99,10 +138,7 @@ const Settings: React.FC = () => {
 					<Button appearance="secondary">Close</Button>
 				</DialogTrigger>
 				<DialogTrigger disableButtonEnhancement>
-					<Button onClick={handleSave} appearance="primary">
-						<SaveFilled/>&nbsp;
-						Save
-					</Button>
+					<Button onClick={handleSave} appearance="primary"><SaveFilled/>&nbsp;Save</Button>
 				</DialogTrigger>
 			</DialogActions>
 		</>
