@@ -9,7 +9,8 @@ import {makeStyles} from "@fluentui/react-components";
 
 const useStyles = makeStyles({
 	root: {
-		fontFamily: "Fira Code', monospace"
+		fontFamily: "Fira Code', monospace",
+		margin: "20px"
 	},
 	contentWrapper: {
 		display: "flex"
